@@ -1,28 +1,28 @@
 /**********************************************************
-						×÷Õß£ºÉñÃØ²Ø±¦ÊÒ
-						µêÆÌ£ºILoveMCU.taobao.com
+						ä½œè€…ï¼šç¥ç§˜è—å®å®¤  æ”¹
+						åº—é“ºï¼šILoveMCU.taobao.com
 												
-½ÓÏßËµÃ÷£º
+æ¥çº¿è¯´æ˜ï¼š
 STM32					GPS
 VCC		------>	VCC
 GND		------>	GND
 RX1		<------	TXD
 
 
-STM32					USB-TTLÄ£¿é
+STM32					USB-TTLæ¨¡å—
 GND		------>	GND
 TX1		------>	RXD
 
-²âÊÔÊ¹ÓÃSTM32×îĞ¡ÏµÍ³£º
+æµ‹è¯•ä½¿ç”¨STM32æœ€å°ç³»ç»Ÿï¼š
 	https://item.taobao.com/item.htm?id=523336310868
-²âÊÔÊ¹ÓÃUSB-TTLÄ£¿é£º
+æµ‹è¯•ä½¿ç”¨USB-TTLæ¨¡å—ï¼š
 	https://item.taobao.com/item.htm?id=39481188174
-²âÊÔÊ¹ÓÃGPSÄ£¿é£º
-	¡¾GPS±ê×¼°æ¡¿
+æµ‹è¯•ä½¿ç”¨GPSæ¨¡å—ï¼š
+	ã€GPSæ ‡å‡†ç‰ˆã€‘
 	https://item.taobao.com/item.htm?id=18982118996
-	¡¾GPS MINI°æ¡¿
+	ã€GPS MINIç‰ˆã€‘
 	https://item.taobao.com/item.htm?id=537475465445
-	¡¾±±¶·+GPSË«Ä£Ä£¿é¡¿
+	ã€åŒ—æ–—+GPSåŒæ¨¡æ¨¡å—ã€‘
 	https://item.taobao.com/item.htm?id=528045510604
 ***********************************************************/
 
@@ -31,17 +31,17 @@ TX1		------>	RXD
 #include "usart.h"
 #include "led.h"
 
-//ÉùÃ÷
+//å£°æ˜
 void errorLog(int num);
 void parseGpsBuffer(void);
 void printGpsBuffer(void);
 
-int main(void)    //ÔÚ´®¿ÚÖĞ¶ÏÀïÖ´ĞĞ´®¿Ú»º³åÇøµÄ¶ÁĞ´
+int main(void)    //åœ¨ä¸²å£ä¸­æ–­é‡Œæ‰§è¡Œä¸²å£ç¼“å†²åŒºçš„è¯»å†™
 {	
 	delay_init();
 	
-	NVIC_Configuration(); 	 //ÉèÖÃNVICÖĞ¶Ï·Ö×é2:2Î»ÇÀÕ¼ÓÅÏÈ¼¶£¬2Î»ÏìÓ¦ÓÅÏÈ¼¶
-	uart_init(9600);	 //´®¿Ú³õÊ¼»¯Îª9600
+	NVIC_Configuration(); 	 //è®¾ç½®NVICä¸­æ–­åˆ†ç»„2:2ä½æŠ¢å ä¼˜å…ˆçº§ï¼Œ2ä½å“åº”ä¼˜å…ˆçº§
+	uart_init(9600);	 //ä¸²å£åˆå§‹åŒ–ä¸º9600
 	Init_LEDpin();
 	LED1 = 1;
 	
@@ -84,7 +84,7 @@ void parseGpsBuffer()
 			if (i == 0)
 			{
 				if ((subString = strstr(Save_Data.GPS_Buffer, ",")) == NULL)
-					errorLog(1);	//½âÎö´íÎó
+					errorLog(1);	//è§£æé”™è¯¯
 			}
 			else
 			{
@@ -94,12 +94,12 @@ void parseGpsBuffer()
 					char usefullBuffer[2]; 
 					switch(i)
 					{
-						case 1:memcpy(Save_Data.UTCTime, subString, subStringNext - subString);break;	//»ñÈ¡UTCÊ±¼ä
-						case 2:memcpy(usefullBuffer, subString, subStringNext - subString);break;	//»ñÈ¡UTCÊ±¼ä
-						case 3:memcpy(Save_Data.latitude, subString, subStringNext - subString);break;	//»ñÈ¡Î³¶ÈĞÅÏ¢
-						case 4:memcpy(Save_Data.N_S, subString, subStringNext - subString);break;	//»ñÈ¡N/S
-						case 5:memcpy(Save_Data.longitude, subString, subStringNext - subString);break;	//»ñÈ¡¾­¶ÈĞÅÏ¢
-						case 6:memcpy(Save_Data.E_W, subString, subStringNext - subString);break;	//»ñÈ¡E/W
+						case 1:memcpy(Save_Data.UTCTime, subString, subStringNext - subString);break;	//è·å–UTCæ—¶é—´
+						case 2:memcpy(usefullBuffer, subString, subStringNext - subString);break;	//è·å–UTCæ—¶é—´
+						case 3:memcpy(Save_Data.latitude, subString, subStringNext - subString);break;	//è·å–çº¬åº¦ä¿¡æ¯
+						case 4:memcpy(Save_Data.N_S, subString, subStringNext - subString);break;	//è·å–N/S
+						case 5:memcpy(Save_Data.longitude, subString, subStringNext - subString);break;	//è·å–ç»åº¦ä¿¡æ¯
+						case 6:memcpy(Save_Data.E_W, subString, subStringNext - subString);break;	//è·å–E/W
 
 						default:break;
 					}
@@ -114,7 +114,7 @@ void parseGpsBuffer()
 				}
 				else
 				{
-					errorLog(2);	//½âÎö´íÎó
+					errorLog(2);	//è§£æé”™è¯¯
 				}
 			}
 
